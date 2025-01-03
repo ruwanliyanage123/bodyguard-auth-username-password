@@ -1,8 +1,7 @@
 package com.bodyguard.auth.userpass.bodyguard_auth_username_password.controller;
 
 import com.bodyguard.auth.userpass.bodyguard_auth_username_password.dto.UserDTO;
-import com.bodyguard.auth.userpass.bodyguard_auth_username_password.entity.UserEntity;
-import com.bodyguard.auth.userpass.bodyguard_auth_username_password.repository.UserRepository;
+import com.bodyguard.auth.userpass.bodyguard_auth_username_password.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,23 +10,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping(value = "/verifyUser")
     public ResponseEntity<String> verifyUser(@RequestBody UserDTO user){
-        UserEntity userEntity =  userRepository.findUserByUserName(user.getUsername());
-        if(userEntity == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Exists. Please Sign Up");
+        String jwtToken =  userService.verifyUser(user);
+        if(jwtToken == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid username or password, Or user not found");
         }
-        if(Objects.equals(userEntity.getUsername(), user.getUsername()) && Objects.equals(userEntity.getPassword(), user.getPassword())){
-            return ResponseEntity.ok("Valid user");
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password");
+        return ResponseEntity.status(HttpStatus.OK).body(jwtToken);
     }
 }

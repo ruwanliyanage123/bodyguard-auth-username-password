@@ -20,12 +20,53 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "mobile")
+    private String mobile;
+
+    @Column(name = "role_id")
+    private Integer roleId;
+
     public UserEntity() {
     }
 
     public UserEntity(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public UserEntity(String username, String password, String email, String mobile, Integer roleId) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.mobile = mobile;
+        this.roleId = roleId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public Integer getId() {
