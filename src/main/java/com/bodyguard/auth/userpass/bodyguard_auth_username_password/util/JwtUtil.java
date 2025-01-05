@@ -3,6 +3,7 @@ package com.bodyguard.auth.userpass.bodyguard_auth_username_password.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -11,7 +12,8 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-    private String secretKey = "1234";
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     public String generateToken(String username, String scopes) {
         Map<String, Object> claims = new HashMap<>();
@@ -26,7 +28,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 20))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
