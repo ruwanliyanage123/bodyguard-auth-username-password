@@ -16,7 +16,8 @@ import java.util.Objects;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private JwtUtil jwtUtil;
     @Autowired
     private ScopeRepository scopeRepository;
 
@@ -30,7 +31,7 @@ public class UserService {
                 scopes.append(",");
               }
             );
-            return JwtUtil.generateToken(userDTO, scopes.toString());
+            return jwtUtil.generateToken(userDTO.getUsername(), scopes.toString());
         }
         return null;
     }

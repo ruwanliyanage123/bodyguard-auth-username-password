@@ -1,3 +1,11 @@
+What are?
+- HTTP
+- Websocket
+- Socekt.io
+- GraphQL
+- gRPC
+- MQTT
+
 ![img.png](img.png)
 
 Why do we have a separate server and db for auth here?
@@ -32,3 +40,5 @@ How to make api with v2 version?
 
 There is another frontend and backend server to create and modify user? Or we can go with database query. what is the best option?
 
+
+@PreAuthorize, @PostAuthorize, or @Secured ?
