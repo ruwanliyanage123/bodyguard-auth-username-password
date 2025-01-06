@@ -28,11 +28,7 @@ to see the expiration of the session, the user's role, etc.
 
 ![img_1.png](img_1.png)
 
-
-
-
 How to create a cookie?
-
 
 What is the difference between JWT and OAuth?
 
@@ -40,5 +36,6 @@ How to make api with v2 version?
 
 There is another frontend and backend server to create and modify user? Or we can go with database query. what is the best option?
 
+@PreAuthorize, @PostAuthorize, or @Secured?
 
-@PreAuthorize, @PostAuthorize, or @Secured ?
+
